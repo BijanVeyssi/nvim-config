@@ -2,7 +2,7 @@ return {
     "L3MON4D3/LuaSnip",
     keys = {
         {
-            "<C-j>",
+            "<C-k>",
             function()
                 if require("luasnip").jumpable(1) then
                     require("luasnip").jump(1)
@@ -11,7 +11,7 @@ return {
             mode = { "i", "s" },
         },
         {
-            "<C-k>",
+            "<C-l>",
             function()
                 if require("luasnip").jumpable(-1) then
                     require("luasnip").jump(-1)
@@ -20,7 +20,7 @@ return {
             mode = { "i", "s" },
         },
         {
-            "<C-l>",
+            "<C-;>",
             function()
                 if require("luasnip").choice_active() then
                     require("luasnip").change_choice(1)
@@ -29,7 +29,7 @@ return {
             mode = { "i", "s" },
         },
         {
-            "<C-h>",
+            "<C-j>",
             function()
                 if require("luasnip").choice_active() then
                     require("luasnip").change_choice(-1)

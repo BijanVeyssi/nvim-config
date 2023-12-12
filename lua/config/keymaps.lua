@@ -1,5 +1,14 @@
 vim.g.mapleader = " "
 
+-- Swap keys
+vim.keymap.set("", "j", "h")
+vim.keymap.set("", "k", "j")
+vim.keymap.set("", "l", "k")
+vim.keymap.set("", ";", "l")
+vim.keymap.set("", "h", ";")
+
+vim.keymap.set("i", "<C-h>", "<BS>")
+
 vim.keymap.set("n", "<leader><leader>", "<C-^>", { desc = "previous file" })
 
 vim.keymap.set({ "n", "x" }, "gd", '"_d', { desc = "delete without updating registers" })
@@ -25,10 +34,10 @@ vim.keymap.set("n", "{", "<Cmd>keepjumps normal! {<CR>")
 vim.keymap.set("n", "}", "<Cmd>keepjumps normal! }<CR>")
 
 -- Move to window
-vim.keymap.set("n", "<C-k>", "<c-w>k")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-w>j", "<C-w>h")
+vim.keymap.set("n", "<C-w>k", "<C-w>j")
+vim.keymap.set("n", "<C-w>l", "<C-w>k")
+vim.keymap.set("n", "<C-w>;", "<C-w>l")
 
 -- Move through tabs
 vim.keymap.set("n", "<S-h>", "<Cmd>tabprevious<CR>")
@@ -40,9 +49,9 @@ vim.keymap.set("n", "<C-Down>", "<Cmd>resize -2<CR>")
 vim.keymap.set("n", "<C-Left>", "<Cmd>vertical resize -2<CR>")
 vim.keymap.set("n", "<C-Right>", "<Cmd>vertical resize +2<CR>")
 
+vim.keymap.set("x", "<C-l>", ":move '<-2<CR>gv=gv")
+vim.keymap.set("x", "<C-k>", ":move '>+1<CR>gv=gv")
 -- Move lines
-vim.keymap.set("x", "<C-k>", ":move '<-2<CR>gv=gv")
-vim.keymap.set("x", "<C-j>", ":move '>+1<CR>gv=gv")
 
 -- Exit terminal mode
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
