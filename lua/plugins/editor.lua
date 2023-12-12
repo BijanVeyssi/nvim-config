@@ -82,7 +82,11 @@ return {
     },
     {
         "NeogitOrg/neogit",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim", -- optional
+            "ibhagwan/fzf-lua", -- optional
+        },
         cmd = "Neogit",
         keys = {
             { "<leader>g", "<Cmd>Neogit<CR>", desc = "neogit" },
