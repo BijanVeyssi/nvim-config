@@ -1,6 +1,9 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
+        { "hrsh7th/cmp-nvim-lsp" },
+        { "mfussenegger/nvim-dap" },
+        { "simrat39/rust-tools.nvim" },
         {
             "folke/neodev.nvim",
             config = true,
@@ -55,7 +58,49 @@ return {
             },
             pyright = {},
             texlab = {},
+            rnix = {},
         }
+
+        local rt = require("rust-tools")
+        rt.setup({
+            server = {
+                on_attach = function(client, bufnr)
+                    require("plugins.lsp.keymaps").on_attach(bufnr)
+                    require("plugins.lsp.ui").on_attach(client, bufnr)
+                    -- Hover actions
+                    vim.keymap.set(
+                        "n",
+                        "<C-space>",
+                        rt.hover_actions.hover_actions,
+                        { buffer = bufnr }
+                    )
+                    -- Code action groups
+                    vim.keymap.set(
+                        "n",
+                        "<Leader>a",
+                        rt.code_action_group.code_action_group,
+                        { buffer = bufnr }
+                    )
+                end,
+                settings = {
+                    ["rust-analyzer"] = {
+                        cargo = { features = "all" },
+                        check = { allTargets = true },
+                    },
+                    procMacro = {
+                        enable = true,
+                    },
+                },
+            },
+            -- debugging stuff
+            dap = {
+                adapter = {
+                    type = "executable",
+                    command = "lldb-vscode",
+                    name = "rt_lldb",
+                },
+            },
+        })
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
