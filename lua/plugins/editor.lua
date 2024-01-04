@@ -95,4 +95,39 @@ return {
             disable_builtin_notifications = true,
         },
     },
+    {
+        "andythigpen/nvim-coverage",
+        dependencies = {
+            { "nvim-lua/plenary.nvim" },
+        },
+        cmd = "Coverage",
+        keys = function() end,
+
+        config = function()
+            require("coverage").setup({
+                commands = true, -- create commands
+                highlights = {
+                    -- customize highlight groups created by the plugin
+                    covered = { fg = "#C3F88D" }, -- supports style, fg, bg, sp (see :h highlight-gui)
+                    uncovered = { fg = "#F04148" },
+                },
+                signs = {
+                    -- use your own highlight groups or text markers
+                    covered = { hl = "CoverageCovered", text = "█" },
+                    uncovered = { hl = "CoverageUncovered", text = "█" },
+                },
+                summary = {
+                    -- customize the summary pop-up
+                    min_coverage = 80.0, -- minimum coverage threshold (used for highlighting)
+                },
+                lang = {
+                    -- customize language specific settings
+                    rust = {
+                        coverage_command = "grcov ${cwd} -s ${cwd} --binary-path ./target/debug/ -t coveralls --branch --ignore-not-existing --token NO_TOKEN",
+                        project_files_only = true,
+                    },
+                },
+            })
+        end,
+    },
 }
