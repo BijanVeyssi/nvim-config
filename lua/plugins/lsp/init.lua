@@ -52,8 +52,18 @@ return {
                 },
             },
             clangd = {
+                filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
                 capabilities = {
-                    textDocument = { completion = { completionItem = { snippetSupport = false } } },
+                    textDocument = {
+                        semanticHighlightingCapabilities = {
+                            semanticHighlighting = true,
+                        },
+                        completion = {
+                            completionItem = {
+                                snippetSupport = false,
+                            },
+                        },
+                    },
                 },
             },
             pyright = {},
