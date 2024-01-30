@@ -81,6 +81,21 @@ return {
         },
     },
     {
+        "f-person/git-blame.nvim",
+        dependencies = {},
+        keys = {
+            { "<leader>bt", "<Cmd>GitBlameToggle<CR>", desc = "Blame toggle" },
+            { "<leader>bo", "<Cmd>GitBlameOpenCommitURL<CR>", desc = "Open in browser" },
+            { "<leader>bc", "<Cmd>GitBlameCopySHA<CR>", desc = "Copy SHA1" },
+        },
+        config = function()
+            require("gitblame").setup({
+                enabled = false,
+                message_template = "  <author> • <date> • <summary>",
+            })
+        end,
+    },
+    {
         "NeogitOrg/neogit",
         dependencies = {
             "nvim-lua/plenary.nvim",
