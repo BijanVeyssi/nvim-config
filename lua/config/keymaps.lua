@@ -29,7 +29,7 @@ vim.keymap.set("n", "<C-b>", "<C-b>zz")
 vim.keymap.set("n", "n", "nzz")
 vim.keymap.set("n", "N", "Nzz")
 
--- Do not update jumplist
+-- Do not update jump list
 vim.keymap.set("n", "{", "<Cmd>keepjumps normal! {<CR>")
 vim.keymap.set("n", "}", "<Cmd>keepjumps normal! }<CR>")
 
@@ -49,9 +49,14 @@ vim.keymap.set("n", "<C-Down>", "<Cmd>resize -2<CR>")
 vim.keymap.set("n", "<C-Left>", "<Cmd>vertical resize -2<CR>")
 vim.keymap.set("n", "<C-Right>", "<Cmd>vertical resize +2<CR>")
 
+-- Move lines
 vim.keymap.set("x", "<C-l>", ":move '<-2<CR>gv=gv")
 vim.keymap.set("x", "<C-k>", ":move '>+1<CR>gv=gv")
--- Move lines
 
 -- Exit terminal mode
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
+
+-- Spell
+vim.keymap.set("n", "<leader>ce", ":setlocal spell spelllang=en_us<CR>")
+vim.keymap.set("n", "<leader>cn", ":setlocal spell spelllang=<CR>")
+vim.keymap.set("n", "<leader>cf", ":setlocal spell spelllang=fr<CR>")
