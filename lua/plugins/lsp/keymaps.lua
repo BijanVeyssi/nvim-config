@@ -25,7 +25,7 @@ function M.on_attach(bufnr)
 
     map("<leader>ll", vim.diagnostic.goto_prev, "previous diagnostic")
     map("<leader>lk", vim.diagnostic.goto_next, "next diagnostic")
-    map("<leader>lf", telescope("diagnostics"))
+    map("<leader>lf", telescope("diagnostics"), "diagnostics list")
     map("<leader>ls", function()
         vim.diagnostic.open_float({ scope = "cursor" })
     end, "cursor diagnostic")
