@@ -9,6 +9,9 @@ vim.filetype.add({
         tig = "tiger",
         tih = "tiger",
         tex = "tex",
+        puml = "plantuml",
+        plantuml = "plantuml",
+        pu = "plantuml",
     },
     filename = {
         ["local.am"] = "automake",
@@ -39,6 +42,25 @@ local function markup_language(ft, cmd)
 end
 markup_language("markdown", "<Cmd>!pandoc % -o %:r.pdf<CR>")
 markup_language("tex", "<Cmd>TexlabBuild<CR>")
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("plantuml"),
+    pattern = "plantuml",
+    callback = function()
+        vim.keymap.set(
+            "n",
+            "<leader>pt",
+            "<Cmd>silent !plantuml %<CR>",
+            { desc = "to png", buffer = 0 }
+        )
+        vim.keymap.set(
+            "n",
+            "<leader>pv",
+            "<Cmd>silent !feh %:r.png &<CR>",
+            { desc = "visualize", buffer = 0 }
+        )
+    end,
+})
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = augroup("highlight_yank"),
