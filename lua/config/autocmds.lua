@@ -40,7 +40,7 @@ local function markup_language(ft, cmd)
         end,
     })
 end
-markup_language("markdown", "<Cmd>!pandoc % -o %:r.pdf<CR>")
+markup_language("markdown", "<Cmd>!pandoc -N % -o %:r.pdf<CR>")
 markup_language("tex", "<Cmd>TexlabBuild<CR>")
 
 vim.api.nvim_create_autocmd("FileType", {

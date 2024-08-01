@@ -6,24 +6,18 @@ return {
             local wk = require("which-key")
             wk.setup()
             local keymaps = {
-                {
-                    mode = { "n" },
-                    ["<leader>f"] = { name = "file/find" },
-                    ["<leader>o"] = { name = "format" },
-                    ["<leader>t"] = { name = "tree" },
-                    ["<leader>d"] = { name = "debugger" },
-                    ["<leader>l"] = { name = "lsp" },
-                    ["<leader>p"] = { name = "pdf" },
-                    ["gc"] = { name = "linewise comment" },
-                    ["gb"] = { name = "blockwise comment" },
-                },
-                {
-                    mode = { "x" },
-                    ["gc"] = { desc = "linewise comment" },
-                    ["gb"] = { desc = "blockwise comment" },
-                },
+                { "<leader>d", group = "debugger" },
+                { "<leader>f", group = "file/find" },
+                { "<leader>l", group = "lsp" },
+                { "<leader>o", group = "format" },
+                { "<leader>p", group = "pdf" },
+                { "<leader>t", group = "tree" },
+                { "gb", group = "blockwise comment" },
+                { "gc", group = "linewise comment" },
+                { "gb", desc = "blockwise comment", mode = "x" },
+                { "gc", desc = "linewise comment", mode = "x" },
             }
-            wk.register(keymaps)
+            wk.add(keymaps)
         end,
     },
     {

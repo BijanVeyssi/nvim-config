@@ -22,6 +22,11 @@ function M.on_attach(bufnr)
 
     map("<leader>ln", vim.lsp.buf.rename, "rename")
     map("<leader>la", vim.lsp.buf.code_action, "action")
+    vim.keymap.set("x", "gla", vim.lsp.buf.code_action, {
+        silent = true,
+        buffer = bufnr,
+        desc = "action",
+    })
 
     map("<leader>ll", vim.diagnostic.goto_prev, "previous diagnostic")
     map("<leader>lk", vim.diagnostic.goto_next, "next diagnostic")
