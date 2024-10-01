@@ -75,6 +75,15 @@ return {
         },
     },
     {
+        "echasnovski/mini.diff",
+        version = false,
+        dependencies = {},
+        keys = {},
+        config = function()
+            require("mini.diff").setup()
+        end,
+    },
+    {
         "f-person/git-blame.nvim",
         dependencies = {},
         keys = {
