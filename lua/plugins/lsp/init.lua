@@ -66,9 +66,10 @@ return {
                     },
                 },
             },
-            pyright = {},
+            basedpyright = {},
             texlab = {},
             rnix = {},
+            pbls = {},
         }
 
         local rt = require("rust-tools")
