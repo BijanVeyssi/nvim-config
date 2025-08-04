@@ -3,7 +3,11 @@ return {
     dependencies = {
         { "hrsh7th/cmp-nvim-lsp" },
         { "mfussenegger/nvim-dap" },
-        { "simrat39/rust-tools.nvim" },
+        {
+            "mrcjkb/rustaceanvim",
+            version = "^6", -- Recommended
+            lazy = false, -- This plugin is already lazy
+        },
         {
             "folke/neodev.nvim",
             config = true,
@@ -29,6 +33,11 @@ return {
                 },
             },
         },
+        {
+            "felpafel/inlay-hint.nvim",
+            event = "LspAttach",
+            config = true,
+        },
     },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
@@ -37,6 +46,9 @@ return {
         vim.diagnostic.config({ severity_sort = true })
 
         local function on_attach(client, bufnr)
+            if vim.lsp.inlay_hint then
+                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            end
             require("plugins.lsp.keymaps").on_attach(bufnr)
             require("plugins.lsp.ui").on_attach(client, bufnr)
         end
@@ -72,46 +84,57 @@ return {
             pbls = {},
         }
 
-        local rt = require("rust-tools")
-        rt.setup({
+        vim.g.rustaceanvim = {
+            -- Plugin configuration
+            tools = {},
+            -- LSP configuration
             server = {
-                on_attach = function(client, bufnr)
-                    require("plugins.lsp.keymaps").on_attach(bufnr)
-                    require("plugins.lsp.ui").on_attach(client, bufnr)
-                    -- Hover actions
-                    vim.keymap.set(
-                        "n",
-                        "<C-space>",
-                        rt.hover_actions.hover_actions,
-                        { buffer = bufnr }
-                    )
-                    -- Code action groups
-                    vim.keymap.set(
-                        "n",
-                        "<Leader>a",
-                        rt.code_action_group.code_action_group,
-                        { buffer = bufnr }
-                    )
-                end,
-                settings = {
+                on_attach = on_attach,
+                default_settings = {
+                    -- rust-analyzer language server configuration
                     ["rust-analyzer"] = {
-                        cargo = { features = "all" },
-                        check = { allTargets = true },
+                        trace = {
+                            extension = false,
+                        },
+                        -- diagnostics = {disabled = {"unresolved-macro-call"}},
+                        cargo = {
+                            -- target = "x86_64-unknown-linux-gnu",
+                            targetDir = true,
+                            -- features = { 'all' },
+                            -- features = { 'host' },
+                            allFeatures = true,
+                        },
+
+                        -- cargo = { features = 'all' },
+                        checkOnSave = true,
+                        check = {
+                            workspace = true,
+                            allFeatures = true,
+                            allTargets = true,
+                            command = "clippy",
+                            extraArgs = {
+                                "--",
+                                "--no-deps",
+                                "-Wclippy::correctness",
+                                "-Wclippy::complexity",
+                                "-Wclippy::perf",
+                            },
+                        },
                     },
                     procMacro = {
                         enable = true,
                     },
                 },
-            },
-            -- debugging stuff
-            dap = {
-                adapter = {
-                    type = "executable",
-                    command = "lldb-vscode",
-                    name = "rt_lldb",
+                -- debugging stuff
+                dap = {
+                    adapter = {
+                        type = "executable",
+                        command = "lldb-vscode",
+                        name = "rt_lldb",
+                    },
                 },
             },
-        })
+        }
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
 

@@ -105,7 +105,7 @@ return {
             lint.linters_by_ft = {
                 markdown = { "markdownlint" },
                 sh = { "shellcheck" },
-                -- proto = { "buf_lint" },
+                proto = { "buf_lint" },
                 fish = { "fish" },
                 nix = { "nix" },
                 -- rust = { "clippy" },
@@ -153,5 +153,22 @@ return {
                 end,
             })
         end,
+    },
+    {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            highlight = {
+                pattern = [[.*<(KEYWORDS)>.*:]], -- pattern or table of patterns, used for highlighting (vim regex) }, },
+                keyword = "",
+                after = "",
+            },
+            search = {
+                pattern = [[\b\<(KEYWORDS)\>.*:]], -- pattern or table of patterns, used for highlighting (vim regex) }, },
+            },
+        },
     },
 }

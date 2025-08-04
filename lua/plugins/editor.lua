@@ -32,17 +32,19 @@ return {
             local telescope = require("utils").telescope
 
             return {
-                { "<leader>ff", telescope("find_files"), desc = "files" },
-                { "<leader>fg", telescope("git_files"), desc = "git files" },
-                { "<leader>fr", telescope("live_grep"), desc = "grep" },
+                { "<leader>f<leader>", telescope("resume"), desc = "resume" },
                 { "<leader>fb", telescope("buffers"), desc = "buffers" },
                 { "<leader>fc", telescope("colorscheme"), desc = "colorscheme" },
+                { "<leader>ff", telescope("find_files"), desc = "files" },
+                { "<leader>fg", telescope("git_files"), desc = "git files" },
                 { "<leader>fh", telescope("oldfiles"), desc = "history" },
+                { "<leader>fr", telescope("live_grep"), desc = "grep" },
+                { "<leader>ft", "<Cmd>TodoTelescope<CR>", desc = "todos" },
             }
         end,
         config = function()
             local telescope = require("telescope")
-            telescope.setup()
+            telescope.setup({})
             telescope.load_extension("fzf")
         end,
     },
@@ -531,7 +533,7 @@ return {
                 lang = {
                     -- customize language specific settings
                     rust = {
-                        coverage_command = "grcov ${cwd} -s ${cwd} --binary-path ./target/debug/ -t coveralls --branch --ignore-not-existing --token NO_TOKEN",
+                        coverage_command = "grcov ${cwd} -s ${cwd} --binary-path ./target/x86_64-unknown-linux-gnu/debug/ -t coveralls --branch --ignore-not-existing --token NO_TOKEN",
                         project_files_only = true,
                     },
                 },

@@ -1,8 +1,8 @@
 local M = {}
 
-function M.telescope(builtin)
+function M.telescope(builtin, opts)
     return function()
-        require("telescope.builtin")[builtin]()
+        require("telescope.builtin")[builtin](opts)
     end
 end
 
