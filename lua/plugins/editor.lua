@@ -208,7 +208,7 @@ return {
                 underline = true,
             },
             -- Set to false if you want to be responsible for creating _ALL_ keymappings
-            use_default_keymaps = true,
+            use_default_keymaps = false,
             -- Neogit refreshes its internal state after specific events, which can be expensive depending on the repository size.
             -- Disabling `auto_refresh` will make it so you have to manually refresh the status after you open it.
             auto_refresh = true,
