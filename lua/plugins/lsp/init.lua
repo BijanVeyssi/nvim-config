@@ -78,7 +78,7 @@ return {
                     },
                 },
             },
-            basedpyright = {},
+            pyright = {},
             texlab = {},
             rnix = {},
             pbls = {},
